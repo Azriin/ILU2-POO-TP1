@@ -62,7 +62,7 @@ public class Village {
 		private String afficherMarche() {
 			StringBuilder chaine = new StringBuilder();
 			int etalsVide = 0;
-			chaine.append("Le marché du village \""+ nom +"\" possède plusieurs étals :\n");
+			chaine.append("Le marchï¿½ du village \""+ nom +"\" possï¿½de plusieurs ï¿½tals :\n");
 			for (int i = 0; i < etals.length; i++) {
 				if (etals[i].isEtalOccupe()) {
 					chaine.append(etals[i].afficherEtal());
@@ -71,7 +71,7 @@ public class Village {
 				}
 			}
 			if (etalsVide != 0) {
-				chaine.append("Il reste " + (etalsVide) +" étals non utilisés dans le marché.\n");
+				chaine.append("Il reste " + (etalsVide) +" ï¿½tals non utilisï¿½s dans le marchï¿½.\n");
 			}
 			return chaine.toString();
 		}
@@ -112,6 +112,10 @@ public class Village {
 	}
 
 	public String afficherVillageois() {
+		if (chef == null){
+			throw new VillageSansChefException("Pas de chef");
+		}
+
 		StringBuilder chaine = new StringBuilder();
 		if (nbVillageois < 1) {
 			chaine.append("Il n'y a encore aucun habitant au village du chef "
@@ -131,7 +135,7 @@ public class Village {
 		int etal = marche.trouverEtalLibre();
 		chaine.append(vendeur.getNom() + " cherche un endroit pour vendre " + nbProduit + " " + produit + ".\n");
 		marche.utiliserEtal(etal, vendeur, produit, nbProduit);
-		chaine.append("Le vendeur " + vendeur.getNom() + "vend des " + produit + " à l'étal n°" + (etal+1) + ".\n");
+		chaine.append("Le vendeur " + vendeur.getNom() + "vend des " + produit + " ï¿½ l'ï¿½tal nï¿½" + (etal+1) + ".\n");
 		return chaine.toString();
 	}
 	
@@ -140,10 +144,10 @@ public class Village {
 		Etal [] lstEtals = marche.trouverEtals(produit);
 		switch (lstEtals.length) {
 		case 0: {
-			chaine.append("Il n'y a pas de vendeur qui propose des " + produit + " au marché.\n");
+			chaine.append("Il n'y a pas de vendeur qui propose des " + produit + " au marchï¿½.\n");
 			break;
 		} case 1: {
-			chaine.append("Seul le vendeur " + lstEtals[0].getVendeur().getNom() + " propose des " + produit + " au marché.\n");
+			chaine.append("Seul le vendeur " + lstEtals[0].getVendeur().getNom() + " propose des " + produit + " au marchï¿½.\n");
 			break;
 		}
 		default:
